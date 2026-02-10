@@ -11,11 +11,13 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-// At least group the URI's;
+// Prefix the auth URI's
 Route::prefix('auth')->group( function() {
+    // Route to call if you want to login with Github
     Route::get('redirect', function () {
         return Socialite::driver('github')->redirect();
     });
+    // Route to return to from Github
     Route::get('callback', function () {
         return Socialite::driver('github')->user();
     });
