@@ -22,6 +22,4 @@ Route::prefix('auth')->group( function() {
     Route::get('callback', [SocialiteAuthController::class, 'authenticate'])->name('socialite_callback');
 });
 
-
-
 require __DIR__.'/settings.php';

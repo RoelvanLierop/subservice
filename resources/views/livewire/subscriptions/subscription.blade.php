@@ -5,6 +5,6 @@
     @if( $showCancelButton )
         <flux:button class="w-full">Cancel subscription</flux:button>
     @else
-        <flux:button class="w-full">Subscribe</flux:button>
+        <flux:button class="w-full" href="{{ url('/') }}">Subscribe</flux:button>
     @endif
 </section>

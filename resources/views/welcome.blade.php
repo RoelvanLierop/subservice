@@ -55,13 +55,13 @@
             <div class="rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5 w-1/2 me-2">
                 <span>Subscription plan: Basic</span><br/>
                 @auth
-                    <flux:button class="w-full">Subscribe to Basic</flux:button>
+                    <flux:button class="w-full" wire:click="subscribe('basic')">Subscribe to Basic</flux:button>
                 @endauth
             </div>
             <div class="rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5 w-1/2">
                 <span>Subscription plan: Professional</span><br/>
                 @auth
-                    <flux:button class="w-full">Subscribe to Professional</flux:button>
+                    <flux:button class="w-full" wire:click="subscribe('professional')">Subscribe to Professional</flux:button>
                 @endauth
             </div>
         </div>

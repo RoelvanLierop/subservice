@@ -22,4 +22,13 @@ class Subscription extends Component
             $this->showCancelButton = true;
         }
     }
+
+    public function subscribe($subscrptionKey){
+        return Auth::user()
+            ->newSubscription($subscrptionKey, 'price_basic_monthly')
+            ->checkout([
+                'success_url' => route('dashboard', ['toast' => 'subscription successful']),
+                'cancel_url' => route('dashboard', ['toast' => 'subscription failed']),
+            ]);
+    }
 }
