@@ -27,8 +27,8 @@ class Subscription extends Component
         return Auth::user()
             ->newSubscription($subscrptionKey, 'price_basic_monthly')
             ->checkout([
-                'success_url' => route('dashboard', ['toast' => 'subscription successful']),
-                'cancel_url' => route('dashboard', ['toast' => 'subscription failed']),
+                'success_url' => route('dashboard'),
+                'cancel_url' => route('dashboard'),
             ]);
     }
 }
