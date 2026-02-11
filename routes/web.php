@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\SocialiteAuthController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Socialite;
-use App\Http\Controllers\SocialiteAuthController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -13,7 +13,7 @@ Route::view('dashboard', 'dashboard')
     ->name('dashboard');
 
 // Prefix the auth URI's
-Route::prefix('auth')->group( function() {
+Route::prefix('auth')->group(function () {
     // Route to call if you want to login with Github
     Route::get('redirect', function () {
         return Socialite::driver('github')->redirect();

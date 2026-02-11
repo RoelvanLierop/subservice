@@ -14,6 +14,7 @@ class SocialiteAuthController extends Controller
     public function authenticate(): RedirectResponse
     {
         $oSocialiteUser = Socialite::driver('github')->user();
+        return Socialite::driver('github')->scopes(['read:user', 'public_repo'])->redirect('dashboard');
 
         // Check if we have a user
         if ($oSocialiteUser !== null) {
