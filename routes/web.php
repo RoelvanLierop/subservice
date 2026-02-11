@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Socialite;
+use App\Http\Controllers\SocialiteAuthController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,11 +17,9 @@ Route::prefix('auth')->group( function() {
     // Route to call if you want to login with Github
     Route::get('redirect', function () {
         return Socialite::driver('github')->redirect();
-    });
+    })->name('socialite_redirect');
     // Route to return to from Github
-    Route::get('callback', function () {
-        return Socialite::driver('github')->user();
-    });
+    Route::get('callback', [SocialiteAuthController::class, 'authenticate'])->name('socialite_callback');
 });
 
 

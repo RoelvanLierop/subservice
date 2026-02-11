@@ -31,5 +31,6 @@
         <env name="PULSE_ENABLED" value="false"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="NIGHTWATCH_ENABLED" value="false"/>
+        <env name="STRIPE_SECRET" value="sk_test_51SzZYDLiFiZNqao9WlzketYNXdUUbxW1Ba5QRdjnIvKqPrtJ7vRSDz6SQMw1rrVVM43nDPQZslT5oDHDJ1FrvNpN00aDS6LHSF"/>
     </php>
 </phpunit>

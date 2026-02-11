@@ -53,9 +53,24 @@
             />
 
             <div class="flex items-center justify-end">
-                <flux:button type="submit" variant="primary" class="w-full" data-test="register-user-button">
+                <flux:button type="submit" variant="primary" class="w-50 me-2" data-test="register-user-button">
                     {{ __('Create account') }}
                 </flux:button>
+                <flux:button variant="primary" class="w-50" href="{{ route('socialite_redirect') }}" icon:trailing="cpu-chip">
+                    {{ __('Register with Github') }}
+                </flux:button>
+            </div>
+
+            <div class="flex items-center justify-end">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
         </form>
 

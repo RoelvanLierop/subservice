@@ -43,9 +43,24 @@
             <flux:checkbox name="remember" :label="__('Remember me')" :checked="old('remember')" />
 
             <div class="flex items-center justify-end">
-                <flux:button variant="primary" type="submit" class="w-full" data-test="login-button">
+                <flux:button variant="primary" type="submit" class="w-50 me-2" data-test="login-button">
                     {{ __('Log in') }}
                 </flux:button>
+                <flux:button variant="primary" class="w-50" href="{{ route('socialite_redirect') }}" icon:trailing="cpu-chip">
+                    {{ __('Login with Github') }}
+                </flux:button>
+            </div>
+
+            <div class="flex items-center justify-end">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
         </form>
 
