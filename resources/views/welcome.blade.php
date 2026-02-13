@@ -43,15 +43,11 @@
         <div class="flex items-center justify-center w-full lg:max-w-4xl transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
             <div class="rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5 w-1/2 me-2">
                 <span>Subscription plan: Basic</span><br/>
-                @auth
-                    <flux:button class="w-full" wire:click="subscribe('basic')">Subscribe to Basic</flux:button>
-                @endauth
+                <h2>Free</h2>
             </div>
             <div class="rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5 w-1/2">
                 <span>Subscription plan: Professional</span><br/>
-                @auth
-                    <flux:button class="w-full" wire:click="subscribe('professional')">Subscribe to Professional</flux:button>
-                @endauth
+                <h2>&euro;10 monthly</h2>
             </div>
         </div>
 

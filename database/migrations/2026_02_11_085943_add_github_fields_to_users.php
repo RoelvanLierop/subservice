@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->string('github_id');
+            $table->string('github_token');
+            $table->string('github_refresh_token');
         });
     }
 
@@ -22,9 +24,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('github_id');
-            $table->string('github_token');
-            $table->string('github_refresh_token');
         });
     }
 };

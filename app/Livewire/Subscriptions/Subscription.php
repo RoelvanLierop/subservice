@@ -2,33 +2,32 @@
 
 namespace App\Livewire\Subscriptions;
 
-use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class Subscription extends Component
 {
-    public string $subscribedTo;
+    public string $subscribedTo = 'none';
+
+    public string $subscriptionStatus = 'none';
 
     public bool $showCancelButton = false;
 
     public function mount(): void
     {
-        $this->subscribedTo = 'none';
-        if (Auth::user()->subscribed('basic')) {
-            $this->subscribedTo = 'basic';
-            $this->showCancelButton = true;
-        } elseif (Auth::user()->subscribed('professional')) {
-            $this->subscribedTo = 'professional';
-            $this->showCancelButton = true;
-        }
-    }
+        $user = Auth::user();
 
-    public function subscribe($subscrptionKey){
-        return Auth::user()
-            ->newSubscription($subscrptionKey, 'price_basic_monthly')
-            ->checkout([
-                'success_url' => route('dashboard'),
-                'cancel_url' => route('dashboard'),
-            ]);
+        if ($user->subscription('prod_TxVBCgQ6C90dQX') !== null)
+        {
+            if ($user->subscription('prod_TxVBCgQ6C90dQX')->stripe_price === 'price_1SzaAwLiFiZNqao9Q2aalUeL') {
+                $this->subscriptionStatus = (!$user->subscription('prod_TxVBCgQ6C90dQX')->canceled() ? 'active' : 'canceled');
+                $this->subscribedTo = 'basic';
+                $this->showCancelButton = true;
+            } elseif ($user->subscription('prod_TxVBCgQ6C90dQX')->stripe_price === 'price_1T0IgtLiFiZNqao9H5pmoBgi') {
+                $this->subscriptionStatus = (!$user->subscription('prod_TxVBCgQ6C90dQX')->canceled() ? 'active' : 'canceled');
+                $this->subscribedTo = 'professional';
+                $this->showCancelButton = true;
+            }
+        }
     }
 }
