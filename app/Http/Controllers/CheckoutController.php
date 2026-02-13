@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 
 class CheckoutController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Checkout call handling
+     *
+     * @param Request $request
+     * @param string $plan
+     * @return Redirector
      */
-    public function __invoke(Request $request, string $plan = 'basic')
+    public function __invoke(Request $request, string $plan = 'basic'): Redirector
     {
         $priceId = 'price_'.($plan === 'basic' ? '1SzaAwLiFiZNqao9Q2aalUeL' : '1T0IgtLiFiZNqao9H5pmoBgi');
         return Auth::user()->newSubscription('prod_TxVBCgQ6C90dQX', $priceId)
@@ -21,7 +28,14 @@ class CheckoutController extends Controller
             ]);
     }
 
-    public function success(Request $request, string $plan = 'basic')
+    /**
+     * Local subscription handling
+     *
+     * @param Request $request
+     * @param string $plan
+     * @return View
+     */
+    public function success(Request $request, string $plan = 'basic'): View
     {
         $priceId = 'price_'.($plan === 'basic' ? '1SzaAwLiFiZNqao9Q2aalUeL' : '1T0IgtLiFiZNqao9H5pmoBgi');
 
@@ -30,7 +44,14 @@ class CheckoutController extends Controller
         return view('checkout.success', ['plan' => $plan]);
     }
 
-    public function cancel(Request $request, string $plan = 'basic')
+    /**
+     * Cancel Subscription
+     *
+     * @param Request $request
+     * @param string $plan
+     * @return RedirectResponse
+     */
+    public function cancel(Request $request, string $plan = 'basic'): RedirectResponse
     {
         $request->user()->subscription('prod_TxVBCgQ6C90dQX')->cancel();
 

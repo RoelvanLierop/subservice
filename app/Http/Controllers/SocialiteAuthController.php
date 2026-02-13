@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
@@ -12,6 +11,11 @@ use Laravel\Socialite\Socialite;
 
 class SocialiteAuthController extends Controller
 {
+    /**
+     * Authentication process
+     *
+     * @return RedirectResponse
+     */
     public function authenticate(): RedirectResponse
     {
         $oSocialiteUser = Socialite::driver('github')->user();
@@ -48,6 +52,12 @@ class SocialiteAuthController extends Controller
         return $this->redirectWithError(['github_error' => 'Unable to login with Github. Please contact support.']);
     }
 
+    /**
+     * Redirect with error helper method
+     *
+     * @param array $errors
+     * @return RedirectResponse
+     */
     private function redirectWithError(array $errors): RedirectResponse
     {
         return Redirect::to('/')->withErrors($errors);
